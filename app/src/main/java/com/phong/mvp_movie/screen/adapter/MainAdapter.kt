@@ -11,38 +11,36 @@ import com.phong.mvp_movie.util.BitmapLoad
 import com.phong.mvp_movie.util.Constant
 import kotlinx.android.synthetic.main.item_movie_grid.view.*
 
-class MainAdapter :
-    RecyclerView.Adapter<MainAdapter.DataViewHolder>() {
-    private val mList = mutableListOf<Movie>()
+class MainAdapter : RecyclerView.Adapter<MainAdapter.DataViewHolder>() {
+
+    private val movie = mutableListOf<Movie>()
+
     fun updateData(movies: MutableList<Movie>?) {
         movies?.let {
-            this.mList.clear()
-            this.mList.addAll(movies)
+            movie.clear()
+            movie.addAll(movies)
             notifyDataSetChanged()
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DataViewHolder {
-        val itemView = LayoutInflater.from(parent.context)
-            .inflate(R.layout.item_movie_grid, parent, false)
+        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.item_movie_grid, parent, false)
         return DataViewHolder(itemView)
     }
 
     override fun onBindViewHolder(holder: DataViewHolder, position: Int) {
-        holder.binData(mList[position])
+        holder.binData(movie[position])
     }
 
-    override fun getItemCount(): Int {
-        return mList.size
-    }
+    override fun getItemCount() = movie.size
 
     inner class DataViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun binData(movie: Movie) {
-            itemView.tvTitle.text = movie.title
-            itemView.tv_vote_count.text = movie.voteCount.toString()
+            itemView.textTitle.text = movie.title
+            itemView.textVoteCount.text = movie.voteCount.toString()
             BitmapLoad(itemView.imgPoster).executeOnExecutor(
-                AsyncTask.THREAD_POOL_EXECUTOR,
-                Constant.IMAGE_URL + movie.posterUrl
+                    AsyncTask.THREAD_POOL_EXECUTOR,
+                    Constant.IMAGE_URL + movie.posterUrl
             )
         }
     }

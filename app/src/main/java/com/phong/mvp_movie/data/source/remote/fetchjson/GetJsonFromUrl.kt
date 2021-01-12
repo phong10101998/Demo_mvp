@@ -1,12 +1,12 @@
 package com.phong.mvp_movie.data.source.remote.fetchjson
 
 import android.os.AsyncTask
-import com.phong.mvp_movie.data.source.remote.OnFetchDataSonListener
+import com.phong.mvp_movie.data.source.remote.OnFetchDataJsonListener
 import org.json.JSONObject
 
 class GetJsonFromUrl<T> constructor(
-    private val listener: OnFetchDataSonListener<T>,
-    private val keyEntity: String
+        private val listener: OnFetchDataJsonListener<T>,
+        private val keyEntity: String
 ) : AsyncTask<String?, Void?, String?>() {
 
     private var exception: Exception? = null

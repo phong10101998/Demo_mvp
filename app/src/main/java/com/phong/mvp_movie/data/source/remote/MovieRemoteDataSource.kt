@@ -13,7 +13,7 @@ class MovieRemoteDataSource : MovieDataSource.Remote {
         val INSTANCE = MovieRemoteDataSource()
     }
 
-    override fun getMovie(listener: OnFetchDataSonListener<MutableList<Movie>>) {
+    override fun getMovie(listener: OnFetchDataJsonListener<MutableList<Movie>>) {
         GetJsonFromUrl(listener, Constant.MOVIE_MODEL).execute(baseUrl)
     }
 

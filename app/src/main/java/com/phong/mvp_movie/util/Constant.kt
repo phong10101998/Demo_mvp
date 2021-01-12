@@ -3,7 +3,6 @@ package com.phong.mvp_movie.util
 import com.phong.mvp_movie.BuildConfig
 
 object Constant {
-
     const val MOVIE_MODEL = "MOVIE_MODEL"
     const val BASE_URL = "https://api.themoviedb.org/3/movie/upcoming?api_key="
     const val BASE_PAGE = "&language=en-US&page=1"

@@ -19,7 +19,7 @@
             android:scaleType="fitCenter" />
 
         <TextView
-            android:id="@+id/tvTitle"
+            android:id="@+id/textTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/dp_5"
@@ -28,7 +28,7 @@
             android:textSize="@dimen/dp_20" />
 
         <TextView
-            android:id="@+id/tv_vote_count"
+            android:id="@+id/textVoteCount"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/dp_5"
