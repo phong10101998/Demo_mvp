@@ -6,10 +6,11 @@ import org.json.JSONObject
 
 class ParseJson {
 
-    fun movieParseJson(jsonObject: JSONObject): Movie {
-        val title = jsonObject.getString(MovieEntry.TITLE)
-        val voteCount = jsonObject.getInt(MovieEntry.VOTE_COUNT)
-        val poster = jsonObject.getString(MovieEntry.POSTER)
-        return Movie(title, voteCount, poster)
+    fun movieParseJson(jsonObject: JSONObject): Movie = jsonObject.run {
+        Movie(
+            getString(MovieEntry.TITLE),
+            getInt(MovieEntry.VOTE_COUNT),
+            getString(MovieEntry.POSTER)
+        )
     }
 }
