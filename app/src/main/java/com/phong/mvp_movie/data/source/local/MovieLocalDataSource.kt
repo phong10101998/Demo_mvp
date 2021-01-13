@@ -5,10 +5,10 @@ import com.phong.mvp_movie.data.source.MovieDataSource
 class MovieLocalDataSource : MovieDataSource.Local {
 
     private object Holder {
-        val INSTANCE = MovieLocalDataSource()
+        val instance = MovieLocalDataSource()
     }
 
     companion object {
-        val instance: MovieLocalDataSource by lazy { Holder.INSTANCE }
+        val instance: MovieLocalDataSource by lazy { Holder.instance }
     }
 }

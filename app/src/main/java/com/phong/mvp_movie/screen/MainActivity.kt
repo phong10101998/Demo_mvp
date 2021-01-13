@@ -32,7 +32,7 @@ class MainActivity : AppCompatActivity(), MainContract.View {
     }
 
     private fun initData() {
-        MainPresenter(MovieRepository.INSTANCE).apply {
+        MainPresenter(MovieRepository.instance).apply {
             setView(this@MainActivity)
             onStart()
         }

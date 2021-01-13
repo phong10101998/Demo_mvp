@@ -21,6 +21,6 @@ class MovieRepository private constructor(
     }
 
     companion object {
-        val INSTANCE: MovieRepository by lazy { Holder.INSTANCE }
+        val instance: MovieRepository by lazy { Holder.INSTANCE }
     }
 }

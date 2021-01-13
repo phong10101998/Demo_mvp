@@ -1,14 +1,13 @@
 package com.phong.mvp_movie.screen.adapter
 
-import android.os.AsyncTask
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.phong.mvp_movie.R
 import com.phong.mvp_movie.data.model.Movie
-import com.phong.mvp_movie.util.BitmapLoad
 import com.phong.mvp_movie.util.Constant
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.item_movie_grid.view.*
 
 class MainAdapter : RecyclerView.Adapter<MainAdapter.DataViewHolder>() {
@@ -17,9 +16,9 @@ class MainAdapter : RecyclerView.Adapter<MainAdapter.DataViewHolder>() {
 
     fun updateData(movies: MutableList<Movie>?) {
         movies?.let {
-            movie.clear()
-            movie.addAll(movies)
-            notifyDataSetChanged()
+            this.movie.clear()
+            this.movie.addAll(movies)
+            this.notifyDataSetChanged()
         }
     }
 
@@ -32,16 +31,13 @@ class MainAdapter : RecyclerView.Adapter<MainAdapter.DataViewHolder>() {
         holder.binData(movie[position])
     }
 
-    override fun getItemCount() = movie.size
+    override fun getItemCount()= movie.size
 
     inner class DataViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun binData(movie: Movie) {
             itemView.textTitle.text = movie.title
             itemView.textVoteCount.text = movie.voteCount.toString()
-            BitmapLoad(itemView.imgPoster).executeOnExecutor(
-                    AsyncTask.THREAD_POOL_EXECUTOR,
-                    Constant.IMAGE_URL + movie.posterUrl
-            )
+            Picasso.get().load(Constant.IMAGE_URL + movie.posterUrl).into(itemView.imgPoster)
         }
     }
 }

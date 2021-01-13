@@ -11,24 +11,24 @@ import java.net.URL
 class ParesDataWithJson {
 
     fun getJsonFromUrl(urlString: String?): String {
-        val url = URL(urlString)
-        val httpURLConnection = url.openConnection() as HttpURLConnection
+        val url = URL(urlString)//khai báo đường dẫn
+        val httpURLConnection = url.openConnection() as HttpURLConnection //mở kết nối đến đường dẫn url
         httpURLConnection.apply {
-            connectTimeout = TIME_OUT
-            readTimeout = TIME_OUT
-            requestMethod = METHOD_GET
+            connectTimeout = TIME_OUT // thời gian kết nối tới api
+            readTimeout = TIME_OUT // thời gian đọc json
+            requestMethod = METHOD_GET // phương thức sủ dụng (GET, POST, PUSH, DELETE)
             doOutput = true
             connect()
         }
-        val bufferedReader = BufferedReader(InputStreamReader(url.openStream()))
-        val stringBuilder = StringBuilder()
+        val bufferedReader = BufferedReader(InputStreamReader(url.openStream())) //Đọc dữ liệu
+        val stringBuilder = StringBuilder() //chứa dữ liệu đọc được
         var line: String?
         while (bufferedReader.readLine().also { line = it } != null) {
             stringBuilder.append(line)
-        }
+        } // đọc từng dòng, đọc hết xuống dòng đọc tiếp
         bufferedReader.close()
         httpURLConnection.disconnect()
-        return stringBuilder.toString()
+        return stringBuilder.toString() //trả về kết quả
     }
 
     fun parseJsonToDaTa(jsonObject: JSONObject?, keyEntity: String): Any {
@@ -37,7 +37,7 @@ class ParesDataWithJson {
             val jsonArray = jsonObject?.getJSONArray(MovieEntry.RESULT)
             for (i in 0 until (jsonArray?.length() ?: 0)) {
                 val jsonObjects = jsonArray?.getJSONObject(i)
-                val item = pareJsonToObject(jsonObjects, keyEntity)
+                val item = parseJsonToObject(jsonObjects, keyEntity)
                 item?.let { data.add(item) }
             }
         } catch (e: Exception) {
@@ -46,7 +46,7 @@ class ParesDataWithJson {
         return data
     }
 
-    private fun pareJsonToObject(jsonObject: JSONObject?, keyEntity: String): Any? {
+    private fun parseJsonToObject(jsonObject: JSONObject?, keyEntity: String): Any? {
         try {
             jsonObject?.let {
                 when (keyEntity) {

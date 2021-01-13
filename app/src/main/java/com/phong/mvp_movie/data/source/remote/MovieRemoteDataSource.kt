@@ -10,7 +10,7 @@ class MovieRemoteDataSource : MovieDataSource.Remote {
     private var baseUrl = Constant.BASE_URL + Constant.BASE_API_KEY + Constant.BASE_PAGE
 
     private object Holder {
-        val INSTANCE = MovieRemoteDataSource()
+        val instance = MovieRemoteDataSource()
     }
 
     override fun getMovie(listener: OnFetchDataJsonListener<MutableList<Movie>>) {
@@ -18,6 +18,6 @@ class MovieRemoteDataSource : MovieDataSource.Remote {
     }
 
     companion object {
-        val instance: MovieRemoteDataSource by lazy { Holder.INSTANCE }
+        val instance: MovieRemoteDataSource by lazy { Holder.instance }
     }
 }
