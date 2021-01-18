@@ -10,11 +10,16 @@ import com.phong.mvp_movie.data.model.Movie
 import com.phong.mvp_movie.data.source.MovieRepository
 import com.phong.mvp_movie.screen.adapter.MainAdapter
 import com.phong.mvp_movie.util.Constant
+import com.phong.mvp_movie.util.addFragment
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity(), MainContract.View {
 
-    private val adapter: MainAdapter by lazy { MainAdapter() }
+    private val adapter: MainAdapter by lazy {
+        MainAdapter {
+            addFragment(DetailMovieFragment.instance(it),R.id.containerMovieDetail)
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

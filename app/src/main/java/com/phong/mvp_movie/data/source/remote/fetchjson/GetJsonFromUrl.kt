@@ -10,7 +10,7 @@ class GetJsonFromUrl<T> constructor(
 
     private var exception: Exception? = null
 
-    override fun doInBackground(vararg params: String?): String? {
+    override fun doInBackground(vararg params: String?): String {
         var data = ""
         try {
             val paresDataWithJson = ParesDataWithJson()

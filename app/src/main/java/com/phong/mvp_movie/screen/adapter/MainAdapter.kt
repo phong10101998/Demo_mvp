@@ -10,7 +10,8 @@ import com.phong.mvp_movie.util.Constant
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.item_movie_grid.view.*
 
-class MainAdapter : RecyclerView.Adapter<MainAdapter.DataViewHolder>() {
+class MainAdapter(private val onItemClicked: (Movie) -> Unit) :
+    RecyclerView.Adapter<MainAdapter.DataViewHolder>() {
 
     private val movie = mutableListOf<Movie>()
 
@@ -23,21 +24,26 @@ class MainAdapter : RecyclerView.Adapter<MainAdapter.DataViewHolder>() {
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DataViewHolder {
-        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.item_movie_grid, parent, false)
-        return DataViewHolder(itemView)
+        val itemView =
+            LayoutInflater.from(parent.context).inflate(R.layout.item_movie_grid, parent, false)
+        return DataViewHolder(itemView, onItemClicked)
     }
 
     override fun onBindViewHolder(holder: DataViewHolder, position: Int) {
         holder.binData(movie[position])
     }
 
-    override fun getItemCount()= movie.size
+    override fun getItemCount() = movie.size
 
-    inner class DataViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    inner class DataViewHolder(itemView: View, private val onCategoryClicked: (Movie) -> Unit) :
+        RecyclerView.ViewHolder(itemView) {
         fun binData(movie: Movie) {
             itemView.textTitle.text = movie.title
             itemView.textVoteCount.text = movie.voteCount.toString()
             Picasso.get().load(Constant.IMAGE_URL + movie.posterUrl).into(itemView.imgPoster)
+            itemView.setOnClickListener {
+                onCategoryClicked(movie)
+            }
         }
     }
 }
